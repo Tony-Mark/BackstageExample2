@@ -21,6 +21,12 @@ $(function(){
 			$("#container").html(data);
 		})
 	})
+	/*学生删除界面*/
+	$("#delete-student").bind("click",function (){
+		$.get("deleteStudent.html",function (data){
+			$("#container").html(data);
+		})
+	})
 	$("#close").bind("click",function(){
 		window.close();
 	})

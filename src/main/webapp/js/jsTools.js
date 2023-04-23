@@ -48,9 +48,35 @@ function JsonsTOTable(divn, json) { //把json数组数据展示在一个“表�
     $("#" + divn).append(send);
 
 }
+// 填充指定选择框内容
+function fillList(elementId, re){
+     //随便取一列取出列名
+     let keys = Object.keys(re[0]);
+     // console.log(keys);
+     //将其填充进选择框
+     let element = document.getElementById(elementId);
+     for (let i = 0; i<re.length; i++){
+         let option = document.createElement("option");
+         option.value = re[i][keys[0]];
+         option.label = re[i][keys[0]];
+         element.appendChild(option);
+     }
+}
 
-//向后台查询,通用后台程序为select——单条件查询,传值(后台程序的url, 数据库表名, 列名, 控件元素的id, 展示的divID)
-function SelectForSingleFactor( url0, tableName, filedName, elementId, divId) {
+// ajax中处理返回的数据
+function processRe(elementId, re, flage){
+    switch(flage){
+     // 填充指定列表内容
+     case 1: fillList(elementId, re); break;
+     // 将内容展示到指定位置
+     case 2: JsonsTOTable(elementId, re); break;
+     case 3: alert("删除成功"); break;
+    }
+ }
+
+
+//向后台查询,通用后台程序为select——单条件查询,传值(后台程序的url, 数据库表名, 列名, 控件元素的id)
+function SelectForSingleFactor(url0, tableName, filedName, elementId, divId) {
     let factorName = document.getElementById(elementId).value.toString();
     console.log(factorName);
     $.ajax({
@@ -61,8 +87,9 @@ function SelectForSingleFactor( url0, tableName, filedName, elementId, divId) {
         dataType: "Json",
         success: function (re) {
             console.log(re);
-            JsonsTOTable(divId, re);
+            //JsonsTOTable(divId, re);
             // JsonsTOdivTable("info_div",re);
+            processRe(elementId, re, 2);
         },
         error: function (re) {
             alert("不成功");
@@ -86,17 +113,47 @@ function InitialList(url0, tableName, filedName, elementId, sortMethod){
         dataType: "Json",
         success: function (re) {
             console.log(re);
-            //随便取一列取出列名
-            let keys = Object.keys(re[0]);
-            console.log(keys);
-            //将其填充进选择框
-            let element = document.getElementById(elementId);
-            for (let i = 0; i<re.length; i++){
-                let option = document.createElement("option");
-                option.value = re[i][keys[0]];
-                option.label = re[i][keys[0]];
-                element.appendChild(option);
-            }
+            processRe(elementId,re,1);
+        },
+        error: function (re) {
+            alert("不成功");
+        }
+    })
+}
+
+// 单条件删除
+function myDelete(url0, tableName, filedName, selectId){
+    let factorName = document.getElementById(selectId).value.toString();
+    $.ajax({
+        type: "post",
+        url: url0,
+        cache: false,
+        data: {"args": tableName + ":" + filedName + ":" + factorName},
+        dataType: "Json",
+        success: function (re) {
+            console.log(re);
+            processRe(selectId, re, 3);
+        },
+        error: function (re) {
+            alert("不成功");
+        }
+    })
+}
+// 多条件删除
+function myDelete2(url0, tableName, filedName1, filedName2, selectId1, selectId2){
+    let factorName1 = document.getElementById(selectId1).value.toString();
+    let factorName2 = document.getElementById(selectId2).value.toString();
+    filedName = filedName1+"-"+filedName2;
+    factorName = factorName1+"-"+factorName2;
+    $.ajax({
+        type: "post",
+        url: url0,
+        cache: false,
+        data: {"args": tableName + ":" + filedName + ":" + factorName},
+        dataType: "Json",
+        success: function (re) {
+            console.log(re);
+            processRe(selectId1, re, 3);
         },
         error: function (re) {
             alert("不成功");
