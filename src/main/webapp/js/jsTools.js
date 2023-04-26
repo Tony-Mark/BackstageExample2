@@ -50,6 +50,8 @@ function JsonsTOTable(divn, json) { //把json数组数据展示在一个“表�
 }
 // 填充指定选择框内容
 function fillList(elementId, re){
+     // 清除内容
+     $("#"+elementId).empty();
      //随便取一列取出列名
      let keys = Object.keys(re[0]);
      // console.log(keys);

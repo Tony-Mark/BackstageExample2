@@ -1,7 +1,14 @@
 .container {
+    /* border: #4CAF50 1px solid; */
     width: 800px;
     margin: 0 auto;
     text-align: center;
+}
+.div_form{
+    /* border: #45a049 1px solid; */
+    margin: 0 auto;
+    /* text-align: center; */
+    width: 500px;
 }
 
 h1 {
@@ -12,7 +19,7 @@ h1 {
 
 form {
     width: 100%;
-    text-align: left;
+    text-align: center;
 }
 
 label {
