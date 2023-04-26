@@ -1,4 +1,4 @@
-package com.xhu.jdbc.utils;
+package com.jdbc.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -125,6 +125,30 @@ public class JDBCUtils {
   public static void selectForSingleFactor(String sql, JSONArray jsonArray, String ... args) throws SQLException {
     JDBCUtils.resultSetToJson(sql, jsonArray, args);
   }
+  public static void selectForSingleFactor2(String sql, JSONArray jsonArray, Integer delete, Integer update, String ... args) throws SQLException {
+    // JDBCUtils.resultSetToJson(sql, jsonArray, args);
+    ResultSet resultSet = preparedSqlForSelect(sql, args);
+    ResultSetMetaData rsmd = null;
+    rsmd = resultSet.getMetaData();
+    int colNum = rsmd.getColumnCount();
+    while (resultSet.next()) {
+      JSONObject jsonObject = new JSONObject(true);
+      for (int col = 1; col <= colNum; col++) {
+        /*getColumnName和getString下标都是从1开始*/
+        jsonObject.put(rsmd.getColumnName(col), resultSet.getString(col));
+      }
+      if (delete == 1){
+        jsonObject.put("删除", "<a href=myDelete?tableName="+rsmd.getTableName(1)+"&key="+rsmd.getColumnName(1)+
+            "&value="+resultSet.getString(1));
+      }
+      if (update == 1){
+        jsonObject.put("删除", "<a href=myUpdate.html?tableName="+rsmd.getTableName(1)+"&key="+rsmd.getColumnName(1)+
+            "&value="+resultSet.getString(1));
+      }
+      jsonArray.add(jsonObject);
+    }
+  }
+  
   /**初始化查询选择数据*/
   public static void selectInitialize(HttpServletRequest request, JSONArray jsonArray){
     String tableName = request.getParameter("tableName");

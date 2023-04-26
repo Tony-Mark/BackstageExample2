@@ -70,7 +70,7 @@ function processRe(elementId, re, flage){
      case 1: fillList(elementId, re); break;
      // 将内容展示到指定位置
      case 2: JsonsTOTable(elementId, re); break;
-     case 3: alert("删除成功"); break;
+     case 3: console.log("删除成功"); break;
     }
  }
 
@@ -78,7 +78,6 @@ function processRe(elementId, re, flage){
 //向后台查询,通用后台程序为select——单条件查询,传值(后台程序的url, 数据库表名, 列名, 控件元素的id)
 function SelectForSingleFactor(url0, tableName, filedName, elementId, divId) {
     let factorName = document.getElementById(elementId).value.toString();
-    console.log(factorName);
     $.ajax({
         type: "post",
         url: url0,
@@ -96,11 +95,29 @@ function SelectForSingleFactor(url0, tableName, filedName, elementId, divId) {
         }
     })
 }
+//向后台查询,通用后台程序为select——单条件查询,传值(后台程序的url, 数据库表名, 列名, 控件元素的id, 展示的列名)
+function SelectForSingleFactor2(url0, tableName, filedName, elementId, divId, filedNames) {
+    let factorName = document.getElementById(elementId).value.toString();
+    $.ajax({
+        type: "post",
+        url: url0,
+        cache: false,
+        data: {"args": tableName + ":" + filedName + ":" + factorName + ":" +filedNames},
+        dataType: "Json",
+        success: function (re) {
+            console.log(re);
+            //JsonsTOTable(divId, re);
+            // JsonsTOdivTable("info_div",re);
+            processRe(elementId, re, 2);
+        },
+        error: function (re) {
+            alert("不成功");
+        }
+    })
+}
 
 // 初始化界面时将数据库中的信息填充进选择框中便于用户查询,传值(后台程序的url, 数据库表名, 所要查询的列名, 控件元素的id, 以何种方式进行排序[1为升序，0为降序])
 function InitialList(url0, tableName, filedName, elementId, sortMethod){
-    /*清除选择框原有的数据*/
-    $("#"+elementId).html("");
     $.ajax({
         type: "post",
         url: url0,
@@ -113,6 +130,17 @@ function InitialList(url0, tableName, filedName, elementId, sortMethod){
         dataType: "Json",
         success: function (re) {
             console.log(re);
+           /* //随便取一列取出列名
+            let keys = Object.keys(re[0]);
+            console.log(keys);
+            //将其填充进选择框
+            let element = document.getElementById(elementId);
+            for (let i = 0; i<re.length; i++){
+                let option = document.createElement("option");
+                option.value = re[i][keys[0]];
+                option.label = re[i][keys[0]];
+                element.appendChild(option);
+            }*/
             processRe(elementId,re,1);
         },
         error: function (re) {
