@@ -15,7 +15,7 @@ $(function(){
             dataType:"Text",
             success:function(re){
                 console.log(re);
-                alert(re);
+                // alert(re);
             },
             error:function(re){
                 alert("不成功");

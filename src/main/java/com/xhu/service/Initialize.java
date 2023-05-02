@@ -25,7 +25,6 @@ public class Initialize extends HttpServlet {
 		RegisterSqlUtil.setCode(request, response);
 		JSONArray jsonArray = new JSONArray();
 		JDBCUtils.selectInitialize(request, jsonArray);
-		System.out.println(jsonArray);
 		PrintWriter writer = response.getWriter();
 		writer.println(jsonArray);
 		writer.flush();

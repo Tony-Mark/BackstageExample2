@@ -18,7 +18,7 @@ public class Student {
 	private StringBuilder address;
 	private StringBuilder date;
 	private String note;
-	private StringBuilder file;
+	private String file;
 	public Student(){
 		super();
 		studentId = "";
@@ -30,13 +30,13 @@ public class Student {
 		address = new StringBuilder("");
 		date = new StringBuilder("");
 		note = "";
-		file = new StringBuilder("");
+		file = "";
 	}
 	
 	public Student(String studentId, String studentName,
 	               String password, String phone, String sex,
 	               StringBuilder hobbies, StringBuilder address, StringBuilder date,
-	               String note, StringBuilder file) {
+	               String note, String file) {
 		this.studentId = studentId;
 		this.studentName = studentName;
 		this.password = password;
@@ -47,6 +47,22 @@ public class Student {
 		this.date = date;
 		this.note = note;
 		this.file = file;
+	}
+	
+	@Override
+	public String toString() {
+		return "Student{" +
+				"studentId='" + studentId + '\'' +
+				", studentName='" + studentName + '\'' +
+				", password='" + password + '\'' +
+				", phone='" + phone + '\'' +
+				", sex='" + sex + '\'' +
+				", hobbies=" + hobbies +
+				", address=" + address +
+				", date=" + date +
+				", note='" + note + '\'' +
+				", file=" + file +
+				'}';
 	}
 	
 	public String getStudentId() {
@@ -121,11 +137,11 @@ public class Student {
 		this.note = note;
 	}
 	
-	public StringBuilder getFile() {
+	public String getFile() {
 		return file;
 	}
 	
-	public void setFile(StringBuilder file) {
+	public void setFile(String file) {
 		this.file = file;
 	}
 }

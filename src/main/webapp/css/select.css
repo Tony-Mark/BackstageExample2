@@ -27,8 +27,8 @@ label {
     color: #333;
 }
 
-input[type="text"], textarea {
-    width: 100%;
+input[type="text"], textarea, select {
+    width: 50%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;

@@ -1,7 +1,7 @@
 $(function(){
 	/*首页*/
 	$("#firstPage").bind("click",function (){
-		$("#container").html("");
+		$("#container").empty();
 	})
 	/*添加课程界面*/
 	$("#add-course").bind("click",function (){
@@ -24,6 +24,16 @@ $(function(){
 	/*学生删除界面*/
 	$("#delete-student").bind("click",function (){
 		$.get("deleteStudent.html",function (data){
+			$("#container").html(data);
+		})
+	})
+	$("#select-course").bind("click",function (){
+		$.get("deleteCourse.html",function (data){
+			$("#container").html(data);
+		})
+	})
+	$("#select-grade").bind("click",function (){
+		$.get("deleteGrade.html",function (data){
 			$("#container").html(data);
 		})
 	})

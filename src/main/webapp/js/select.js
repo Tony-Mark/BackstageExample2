@@ -7,8 +7,8 @@ $(function (){
         InitialList("initialize", "student", factor, "studentMessage", 1);
     })
     $("#select").bind("click",function (){
-        $("#select_context").html("");
+        $("#select_context").empty();
         let factor = $("input:radio:checked").val();
-        SelectForSingleFactor("select", "student", factor, "studentMessage", "select_context");
+        SelectForSingleFactor0("select", "student", factor, "studentMessage", "select_context");
     })
 })

@@ -23,6 +23,15 @@ public class Grade {
 		this.score = score;
 	}
 	
+	@Override
+	public String toString() {
+		return "Grade{" +
+				"studentId='" + studentId + '\'' +
+				", courseCode='" + courseCode + '\'' +
+				", score='" + score + '\'' +
+				'}';
+	}
+	
 	public String getStudentId() {
 		return studentId;
 	}

@@ -2,24 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>查询学生</title>
+    <title>查询成绩</title>
     <style>@import url("css/select.css");</style>
     <style>@import url("css/MyTable.css");</style>
     <script src="js/jquery-1.8.3.js"></script>
-    <script src="js/select.js"></script>
+    <script src="js/deleteGrade.js"></script>
 </head>
 <body>
 <div class="container">
-    <h1>查询学生</h1>
+    <h1>查询成绩</h1>
     <div class="div_form">
         <form>
             <label for="studentMessage">
-                <input class="condition" type="radio" name="condition" value="studentId" checked>按学号查询
-                <input class="condition" type="radio" name="condition" value="sex">按性别查询
+                <input class="condition" type="radio" name="condition" value="all" checked>查询全部
+                <input class="condition" type="radio" name="condition" value="studentId">按学号查询
+                <input class="condition" type="radio" name="condition" value="courseCode">按课程号查询
             </label>
             <select id="studentMessage"></select>
             <br>
-    <!--        <input type="text" id="studentMessage" name="studentMessage"><br><br>-->
+            <!--        <input type="text" id="studentMessage" name="studentMessage"><br><br>-->
         </form>
     </div>
     <input type="button" id="select" value="查询"><br><br>

@@ -1,35 +1,13 @@
-.mytable1 {
-  width: 95%;
-  margin: 0 auto;
-  text-align: center;
-  height: auto;
+.table0{
+    font-family: "华文楷体", serif;
+    font-size: 20px;
+    border: 1px;
+    width: 95%;
 }
-
-.myTr1 {
-  width: 100%;
-  height: 30px;
+.table0 th{
+    background-color: #45a049;
+    width: auto;
 }
-
-.myTr1 div {
-  width: 24%;
-  height: 100%;
-  float: left;
-  border-top: 1px red solid;
-  border-left: 1px red solid;
-}
-
-.myTd {
-  height: 100%;
-  float: left;
-  margin: 0 auto;
-  border-top: 1px red solid;
-  border-left: 1px red solid;
-}
-
-.mytdRight {
-  border-right: 1px red solid;
-}
-
-.mytdBottom {
-  border-bottom: 1px red solid;
+.table0 td{
+    background-color: white;
 }

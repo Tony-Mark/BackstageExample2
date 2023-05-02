@@ -1,4 +1,7 @@
 $(function (){
+    window.onload = function (){
+        init();
+    }
     $("#reset").bind("click",function (){
         $("#studentId").val("");
         $("#courseCode").val("");
@@ -6,20 +9,15 @@ $(function (){
     })
     $("#submit").bind("click",function (){
         let url0 = $("#scoreForm").attr("action");
-        /*序列化提交表单*/
-        let data0 = $("#scoreForm").serialize();
-        console.log(data0);
-        $.ajax({
-            type : "post",
-            url : url0,
-            data : data0,
-            dataType : "Text",
-            success:function (re){
-                alert(re);
-            },
-            error:function (){
-                alert("出现错误，请重试");
-            }
-        })
-    })
+        if (getFormAllData(url0,"scoreForm")){
+            alert("添加成功");
+        }else{
+            alert("添加失败");
+        }
+    }) 
 })
+
+function init(){
+    InitialList("initialize","student","studentId","studentId",1);
+    InitialList("initialize","course","courseCode","courseCode",1);
+}
